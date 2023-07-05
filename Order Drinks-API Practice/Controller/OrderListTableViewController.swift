@@ -59,6 +59,12 @@ class OrderListTableViewController: UITableViewController {
         orderRecords.count
     }
     
+    fileprivate func configuration(_ cell: OrderListTableViewCell) {
+        cell.frameImageView.layer.cornerRadius = 10
+        cell.frameImageView.layer.borderWidth = 4
+        cell.frameImageView.layer.borderColor = CGColor(red: 147/255, green: 189/255, blue: 197/255, alpha: 1)
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(OrderListTableViewCell.self)", for: indexPath) as? OrderListTableViewCell else {
             fatalError("dequeueReusableCell OrderListTableViewCell failed")
@@ -71,13 +77,10 @@ class OrderListTableViewController: UITableViewController {
         cell.sizeLabel.text = orderRecords[row].fields.size+" x "+orderRecords[row].fields.quantity.description
         cell.iceLevelLabel.text = orderRecords[row].fields.iceLevel
         cell.sugarLavelLabel.text = orderRecords[row].fields.sugarLevel
-        //cell.quantityLabel.text = "Qty x"+orderRecords[row].fields.quantity.description
         cell.noteLabel.text = orderRecords[row].fields.note
         cell.timeLabel.text = orderRecords[row].fields.time
         
-        cell.frameImageView.layer.cornerRadius = 10
-        cell.frameImageView.layer.borderWidth = 4
-        cell.frameImageView.layer.borderColor = CGColor(red: 147/255, green: 189/255, blue: 197/255, alpha: 1)
+        configuration(cell)
         
         return cell
     }

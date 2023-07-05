@@ -13,10 +13,7 @@ extension MenuViewController: UICollectionViewDataSource {
         presentItems.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MenuCollectionViewCell.self)", for: indexPath) as? MenuCollectionViewCell else {fatalError("dequeueReusableCell MenuCollectionViewCell failed")}
-        
+    fileprivate func configuration(_ cell: MenuCollectionViewCell) {
         cell.activityIndicator.hidesWhenStopped = true
         cell.activityIndicator.startAnimating()
         
@@ -25,6 +22,13 @@ extension MenuViewController: UICollectionViewDataSource {
         cell.frameImageView.layer.cornerRadius = 10
         cell.frameImageView.layer.borderWidth = 4
         cell.frameImageView.layer.borderColor = CGColor(red: 147/255, green: 189/255, blue: 197/255, alpha: 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MenuCollectionViewCell.self)", for: indexPath) as? MenuCollectionViewCell else {fatalError("dequeueReusableCell MenuCollectionViewCell failed")}
+        
+        configuration(cell)
         
         let presentItem = presentItems[indexPath.row]
         
